@@ -143,7 +143,10 @@ class AuthV4Query extends Signer implements Signable
 		$this->querystring = $this->canonical_querystring();
 
 		$this->headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
-		$this->headers['X-Amz-Target'] = $x_amz_target;
+        if ($x_amz_target)
+        {
+            $this->headers['X-Amz-Target'] = $x_amz_target;
+        }
 
 		// Pass along registered stream callbacks
 		if ($this->registered_streaming_read_callback)
